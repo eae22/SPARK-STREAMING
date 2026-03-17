@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import explode, split, col, current_timestamp
+from pyspark.sql.functions import explode, split, col
 
 spark = SparkSession.builder \
     .appName("WordCountFile") \
@@ -17,8 +17,7 @@ lines = spark.readStream \
     .load()
 
 words = lines.select(
-    explode(split(col("value"), " ")).alias("word"),
-    current_timestamp().alias("timestamp")
+    explode(split(col("value"), " ")).alias("word")
 )
 
 word_count = words.groupBy("word").count().orderBy("count", ascending=False)
@@ -26,8 +25,8 @@ word_count = words.groupBy("word").count().orderBy("count", ascending=False)
 query = word_count.writeStream \
     .outputMode("complete") \
     .format("console") \
+    .option("truncate", False) \
     .trigger(processingTime="5 seconds") \
     .start()
 
 query.awaitTermination()
-
