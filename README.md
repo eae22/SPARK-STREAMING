@@ -11,4 +11,4 @@
 - Part 2. 파일 소스로 실시간 단어 카운트 (File Source → Word Count → Console Sink)
 
 ## 실습 자료
-- [노션 링크](https://www.notion.so/Spark-Streaming-3240b1b9e132815284b7f6975666ae00?source=copy_link)
+- [노션 링크](https://chain-existence-b98.notion.site/Spark-Streaming-3240b1b9e132815284b7f6975666ae00?pvs=143)
